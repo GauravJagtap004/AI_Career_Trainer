@@ -96,6 +96,18 @@ const getFallBackQuestions = (
   return DEFAULT_QUESTIONS.default;
 };
 
+const parseFormValue = (value: FormDataEntryValue | null, fallback: unknown) => {
+  if (typeof value !== "string") return fallback;
+
+  try {
+    return JSON.parse(value);
+  } catch {
+    return typeof fallback === "number"
+      ? Number(value)
+      : value.split(",").map((item) => item.trim()).filter(Boolean);
+  }
+};
+
 export async function POST(req: Request) {
   try {
     await connectDB();
@@ -116,10 +128,11 @@ export async function POST(req: Request) {
     // parse form data
     const formData = await req.formData();
     const jobRole = formData.get("jobRole") as string;
-    const techStack = JSON.parse(formData.get("techStack") as string);
-    const yearsOfExperience = JSON.parse(
-      formData.get("yearsOfExperience") as string
-    );
+    const techStack = parseFormValue(formData.get("techStack"), []) as string[];
+    const yearsOfExperience = parseFormValue(
+      formData.get("yearsOfExperience"),
+      0
+    ) as number;
     const resumeFile = formData.get("resume") as File | null;
 
     if (!jobRole || !techStack) {

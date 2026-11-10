@@ -25,13 +25,21 @@ const NavBar = () => {
         <ul className="flex font-[500] text-[var(--nav-text)] text-lg gap-18 items-center">
           {["Home", "About", "Services", "Contacts", "Dashboard"].map(
             (item, index) => {
-              const link = item === "Home" ? "/" : `/${item.toLowerCase()}`;
+              const link =
+                item === "Home"
+                  ? "/"
+                  : item === "Contacts"
+                    ? "/contact"
+                    : `/${item.toLowerCase()}`;
 
               return (
                 <li key={index} className="relative nav-hover">
                   <Link
                     href={link}
-                    className={`${pathname === link ? "font-bold" : ""}`}
+                    aria-current={pathname === link ? "page" : undefined}
+                    className={`transition-colors hover:text-white ${
+                      pathname === link ? "font-bold text-white" : ""
+                    }`}
                   >
                     {item}
                   </Link>

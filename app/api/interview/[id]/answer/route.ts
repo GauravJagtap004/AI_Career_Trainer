@@ -122,12 +122,17 @@ export async function POST(
       // FIX: Surface the real error message from gemini.ts instead of wrapping
       // it in a generic "Failed to analyze interview response" that hides the cause
       console.error("Error during answer analysis:", analysisError);
+      const missingGroqApiKey =
+        analysisError instanceof Error &&
+        analysisError.message === "GROQ_API_KEY is not set in .env.local";
       return NextResponse.json(
         {
-          message: "Error analyzing answer",
+          message: missingGroqApiKey
+            ? "AI analysis is not configured. Add GROQ_API_KEY to .env.local and restart the local server."
+            : "Error analyzing answer",
           error: analysisError?.message || "Unknown analysis error",
         },
-        { status: 500 }
+        { status: missingGroqApiKey ? 503 : 500 }
       );
     }
   } catch (error: any) {

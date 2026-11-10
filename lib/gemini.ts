@@ -1,6 +1,12 @@
 import Groq from "groq-sdk";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+const getGroqClient = () => {
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error("GROQ_API_KEY is not set in .env.local");
+  }
+
+  return new Groq({ apiKey: process.env.GROQ_API_KEY });
+};
 
 const extractJSON = (text: string): any => {
   const jsonMatch = text.match(/\{[\s\S]*\}/);
@@ -20,6 +26,7 @@ export const generateInterviewQuestions = async (
       throw new Error("GROQ_API_KEY is not set in .env.local");
     }
 
+    const groq = getGroqClient();
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
       messages: [
@@ -65,6 +72,7 @@ export const analyzeResponse = async (
       throw new Error("GROQ_API_KEY is not set in .env.local");
     }
 
+    const groq = getGroqClient();
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
       messages: [
@@ -134,6 +142,7 @@ export const generateInterviewFeedback = async (
       )
       .join("\n\n");
 
+    const groq = getGroqClient();
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
       messages: [

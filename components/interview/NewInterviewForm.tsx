@@ -69,7 +69,14 @@ const NewInterviewForm = ({
         body: formData,
       });
 
-      const data = await response.json();
+      let data: any;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error(
+          `Server returned a non-JSON response (${response.status}). Please check the server logs.`
+        );
+      }
 
       if (!response.ok) {
         if (response.status == 429) {

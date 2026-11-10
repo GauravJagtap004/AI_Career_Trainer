@@ -1,4 +1,4 @@
-"use client";
+  "use client";
 
 import { ArrowLeft, Clock, Lock, Timer } from "lucide-react";
 import Link from "next/link";
@@ -26,9 +26,12 @@ const InterviewNav = ({ interview }: { interview: any }) => {
           </div>
         </div>
         <div className="flex items-center gap-6 text-white">
-          <button className="p-3 max-sm:hidden rounded-full border border-slate-700 bg-slate-800/50 hover:bg-[#b87a9c]/20 hover:border-[#b87a9c]/50 cursor-pointer transition-all duration-300">
+          <div
+            title="Interview session timer and answer controls are shown below"
+            className="p-3 max-sm:hidden rounded-full border border-slate-700 bg-slate-800/50"
+          >
             <Timer className="h-4 w-4 text-[#d8a1bc]" />
-          </button>
+          </div>
           <Link
             href={"/dashboard"}
             className="flex hover:bg-slate-800/50 px-4 py-2 rounded-lg items-center -space-x-1.5 hover:text-white transition-colors duration-400 group"

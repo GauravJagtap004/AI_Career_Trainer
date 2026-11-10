@@ -108,6 +108,7 @@ export default function InterviewSession({
 
   const startRecording = () => {
     try {
+      setError("");
       const SpeechRecognition =
         window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
@@ -163,7 +164,11 @@ export default function InterviewSession({
 
       recognition.onerror = (event: ISpeechRecognitionErrorEvent) => {
         console.error("Speech recognition error:", event.error);
-        setError(`Speech recognition error: ${event.error}`);
+        setError(
+          event.error === "no-speech"
+            ? "No speech was detected. Check that your microphone is connected and allowed, then try again."
+            : `Speech recognition error: ${event.error}`
+        );
         stopRecording();
       };
 

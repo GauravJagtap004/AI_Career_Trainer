@@ -45,3 +45,8 @@ InterviewAI is a smart, full-stack mock interview platform designed to simulate 
 ```bash
 # Clone the repo
 git clone https://github.com/theeaashish/interview-ai
+```
+
+## Local configuration
+
+Answer analysis and AI-generated interview questions use Groq. Add a `GROQ_API_KEY` entry to `.env.local` before starting the development server. Restart the server after changing environment variables.

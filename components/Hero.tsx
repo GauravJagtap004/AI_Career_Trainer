@@ -55,15 +55,17 @@ const Hero = () => {
         </Link>
       </div>
 
-      <div className="arrow-div mt-22 bg-[var(--theme-color)] rounded-full absolute cursor-pointer transition-all duration-300 hover:bg-[var(--theme-hover)] group">
-        <Image
-          width={45}
-          height={45}
-          className="transition-all duration-300 invert group-hover:invert-0"
-          src="/images/arrow.svg"
-          alt="arrow"
-        />
-      </div>
+      <Link href="/dashboard" aria-label="Go to dashboard">
+        <div className="arrow-div mt-22 bg-[var(--theme-color)] rounded-full absolute cursor-pointer transition-all duration-300 hover:bg-[var(--theme-hover)] group">
+          <Image
+            width={45}
+            height={45}
+            className="transition-all duration-300 invert group-hover:invert-0"
+            src="/images/arrow.svg"
+            alt="arrow"
+          />
+        </div>
+      </Link>
 
       <div className="absolute bottom-0 flex justify-center w-full overflow-hidden -z-10">
         <Image

@@ -47,7 +47,7 @@ const ResultsNav = ({
         {/* back to dashboard */}
         <MainButton
           color="blue"
-          text="Back to Dashbaord"
+          text="Back to Dashboard"
           onClick={() => router.push(`/dashboard`)}
         />
       </div>

@@ -25,6 +25,8 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       <div className="relative w-full max-w-2xl p-6 bg-white rounded-lg">
         <button
           onClick={onClose}
+          aria-label="Close dialog"
+          type="button"
           className="absolute text-gray-500 top-4 right-4 hover:text-gray-700"
         >
           &times;

@@ -10,12 +10,6 @@ const nextConfig = {
     // your project has TypeScript errors.
     ignoreBuildErrors: true,
   },
-  experimental: {
-    // Disable Tailwind CSS Oxide engine
-    tailwindcss: {
-      oxideResolver: false
-    }
-  },
 };
 
 module.exports = nextConfig; 
